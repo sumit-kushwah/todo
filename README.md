@@ -1,4 +1,4 @@
-## Todo Cli
+## Todo
 
 A simple python program to manage  todos
 
