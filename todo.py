@@ -25,9 +25,11 @@ else:
     if args.list:
         manager.listTasks(args.project)
     if args.overdue:
-        manager.listDueTasks(args.project)
+        print("This feature is in development.")
+        # manager.listDueTasks(args.project)
     if args.upcoming:
-        manager.listUpcomingTasks(args.project)
+        print("This feature is in development.")
+        # manager.listUpcomingTasks(args.project)
     if args.listprojects:
         manager.listProjects()
     if args.deleteproject:

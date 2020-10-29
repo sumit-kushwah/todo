@@ -38,8 +38,8 @@ class Manager:
                 if self.tasks[taskid]["project"] == project:
                     tasks[taskid] = self.tasks[taskid]
             if self.NoTasklogger(tasks, "This project has no task."): return
-            movedTasks = self.showCheckBoxList(tasks, project + " Tasks")
-            self.moveToToday(movedTasks["taskids"])
+            movedTasks = self.showCheckBoxList(tasks, project + " Tasks", True)
+            self.moveToToday(movedTasks["taskids"], project)
 
     def addTasks(self, descriptions, project=None):
         listname = ''
@@ -74,16 +74,22 @@ class Manager:
                 continue
         self.saveTasks()
 
-    def moveToToday(self, taskids):
-        for taskid in taskids:
-            try:
-                self.tasks[taskid]["date"] = str(datetime.datetime.utcnow())
-            except KeyError:
-                continue
+    def moveToToday(self, taskids, project):
+        for taskid in self.tasks:
+            task = self.tasks[taskid]
+            if task["project"] == project:
+                if (taskid in taskids):
+                    self.tasks[taskid]["date"] = str(datetime.datetime.utcnow())
+                else:
+                    self.tasks[taskid]["date"] = None
+
         self.saveTasks()
-        self.simpleLogger(str(len(taskids)) + " tasks moved to today list.", bcolors.OKBLUE)
+        self.simpleLogger(str(len(taskids)) + " tasks in today list.", bcolors.OKBLUE)
     
     def isTodayTask(self, task):
+        if task["date"] is None:
+            return False
+
         taskdate = datetime.datetime.fromisoformat(task["date"])
         today = datetime.datetime.now()
         if (today.year == taskdate.year and
@@ -93,18 +99,28 @@ class Manager:
         else:
             return False
     
-    def showCheckBoxList(self, tasks, message="Tasks"):
+    def showCheckBoxList(self, tasks, message="Tasks", projectMode=False):
+        default = []
+        if projectMode:
+            #set scheduled task as default
+            for taskid in tasks:
+                task = tasks[taskid]
+                if self.isTodayTask(task):
+                    default.append(taskid)
+
         choices = []
         for taskid in tasks:
             choices.append((tasks[taskid]["description"], taskid))
         questions = [
             inquirer.Checkbox('taskids',
                 message=message,
-                choices=choices)
+                choices=choices,
+                default=default)
         ]
         answers = inquirer.prompt(questions, theme=GreenPassion())
         return answers
 
+    #logger 
     def NoTasklogger(self, tasks, message, messageColor=bcolors.WARNING):
         if (len(tasks.keys()) == 0):
             print(messageColor + message + bcolors.ENDC)
@@ -115,13 +131,14 @@ class Manager:
     def simpleLogger(self, message, messageColor=None):
         print(messageColor + message + bcolors.ENDC)
     
+    #project handler functions 
     def deleteProject(self, project):
         taskids = []
         for taskid in self.tasks:
             if (self.tasks["taskid"]["project"] == project):
                 taskids.append(taskid)
         self.deleteTasks(taskids)
-        self.simpleLogger(len(taskids) + " tasks deleted.", bcolors.OKWARNING)
+        self.simpleLogger(str(len(taskids)) + " tasks deleted.", bcolors.WARNING)
     
     def listProjects(self):
         projects = set(())
