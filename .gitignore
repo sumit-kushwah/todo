@@ -1,4 +1,5 @@
 *.json
 todo
+__pycache__/
 *.pyc
 *.pyo
