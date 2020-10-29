@@ -1,13 +1,14 @@
+#!/usr/bin/env python3
+
 import argparse
 import sys
 from manager import *
-from PyInquirer import prompt, Separator
 
 parser = argparse.ArgumentParser(description='A todo command line application')
 group = parser.add_mutually_exclusive_group()
-group.add_argument("-a", "--add", help="add task")
+group.add_argument("-a", "--add", help="add task", nargs='+')
 group.add_argument("-l", "--list", help="list tasks", action="store_true")
-group.add_argument("-r", "--due", help="list due tasks", action="store_true")
+group.add_argument("-due", "--overdue", help="list  overdue tasks", action="store_true")
 group.add_argument("-dp", "--deleteproject", help="delete a project")
 group.add_argument("-lp", "--listprojects", help="list projects", action="store_true")
 group.add_argument("-u", "--upcoming", help="list upcoming tasks", action="store_true")
@@ -20,10 +21,10 @@ if (len(sys.argv) == 1):
 else:
     manager = Manager()
     if args.add:
-        manager.addTask(args.add, args.project)
+        manager.addTasks(args.add, args.project)
     if args.list:
         manager.listTasks(args.project)
-    if args.due:
+    if args.overdue:
         manager.listDueTasks(args.project)
     if args.upcoming:
         manager.listUpcomingTasks(args.project)

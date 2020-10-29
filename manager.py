@@ -2,14 +2,22 @@ import uuid
 import json
 import datetime
 import inquirer
+from os.path import expanduser
 from colors import bcolors
 from inquirer.themes import *
 
+home = expanduser("~")
+dbfilepath = home + "/tasks.json"
 class Manager:
     def __init__(self):
-        with open('./tasks.json', 'r') as f:
+        with open(dbfilepath, 'r') as f:
             self.tasks = dict(json.load(f))
             f.close()
+    
+    def saveTasks(self):
+        with open(dbfilepath, 'w') as f:
+            json.dump(self.tasks, f)
+        f.close()
 
     def listTasks(self, project=None):
         tasks = {}
@@ -19,7 +27,7 @@ class Manager:
                 if task["date"]:
                     if self.isTodayTask(task):
                         tasks[taskid] = task
-            if self.NoTasklogger(tasks, "No task due for today."): return
+            if self.NoTasklogger(tasks, "No task added for today."): return
             completedTasks = self.showCheckBoxList(tasks, "Today Tasks")
             taskids = completedTasks["taskids"]
             self.deleteTasks(taskids)
@@ -32,10 +40,8 @@ class Manager:
             if self.NoTasklogger(tasks, "This project has no task."): return
             movedTasks = self.showCheckBoxList(tasks, project + " Tasks")
             self.moveToToday(movedTasks["taskids"])
-        
 
-    def addTask(self, description, project=None):
-        taskid = str(uuid.uuid4())
+    def addTasks(self, descriptions, project=None):
         listname = ''
         if (project is None):
             date = str(datetime.datetime.utcnow())
@@ -43,16 +49,22 @@ class Manager:
         else:
             date = None
             listname = project + ' project.'
+            
+        for description in descriptions:
+            self.addTask(description, date, project)  
+
+        self.saveTasks()
+        self.simpleLogger(str(len(descriptions))+" task added to " + listname , bcolors.OKGREEN) 
+
+    def addTask(self, description, date, project=None):
+        taskid = str(uuid.uuid4())
         task = {
             "id": taskid,
             "project": project,
             "description": description,
             "date": date
         }
-
         self.tasks[taskid] = task
-        self.saveTasks()
-        self.simpleLogger("1 task added to " + listname , bcolors.OKGREEN)
 
     def deleteTasks(self, taskids):
         for taskid in taskids:
@@ -70,11 +82,6 @@ class Manager:
                 continue
         self.saveTasks()
         self.simpleLogger(str(len(taskids)) + " tasks moved to today list.", bcolors.OKBLUE)
-
-    def saveTasks(self):
-        with open('./tasks.json', 'w') as f:
-            json.dump(self.tasks, f)
-        f.close()
     
     def isTodayTask(self, task):
         taskdate = datetime.datetime.fromisoformat(task["date"])
@@ -95,7 +102,6 @@ class Manager:
                 message=message,
                 choices=choices)
         ]
-
         answers = inquirer.prompt(questions, theme=GreenPassion())
         return answers
 
