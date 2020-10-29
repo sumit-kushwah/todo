@@ -111,13 +111,14 @@ class Manager:
         choices = []
         for taskid in tasks:
             choices.append((tasks[taskid]["description"], taskid))
+
         questions = [
             inquirer.Checkbox('taskids',
                 message=message,
                 choices=choices,
                 default=default)
         ]
-        answers = inquirer.prompt(questions, theme=GreenPassion())
+        answers = inquirer.prompt(questions)
         return answers
 
     #logger 
@@ -135,8 +136,11 @@ class Manager:
     def deleteProject(self, project):
         taskids = []
         for taskid in self.tasks:
-            if (self.tasks["taskid"]["project"] == project):
-                taskids.append(taskid)
+            try:
+                if (self.tasks["taskid"]["project"] == project):
+                    taskids.append(taskid)
+            except:
+                continue
         self.deleteTasks(taskids)
         self.simpleLogger(str(len(taskids)) + " tasks deleted.", bcolors.WARNING)
     
