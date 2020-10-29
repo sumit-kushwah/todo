@@ -44,7 +44,7 @@ class Manager:
     def addTasks(self, descriptions, project=None):
         listname = ''
         if (project is None):
-            date = str(datetime.datetime.utcnow())
+            date = str(datetime.datetime.now())
             listname = 'today.'
         else:
             date = None
@@ -79,7 +79,7 @@ class Manager:
             task = self.tasks[taskid]
             if task["project"] == project:
                 if (taskid in taskids):
-                    self.tasks[taskid]["date"] = str(datetime.datetime.utcnow())
+                    self.tasks[taskid]["date"] = str(datetime.datetime.now())
                 else:
                     self.tasks[taskid]["date"] = None
 
@@ -150,4 +150,45 @@ class Manager:
         
         for project in projects:
             self.simpleLogger("* " + project , bcolors.OKGREEN)
+
+    def listDueTasks(self, project=None):
+        tasks = {}
+        today = datetime.datetime.now()
+        for taskid in self.tasks:
+                task = self.tasks[taskid]
+                if project and task["project"] != project:
+                    continue
+                if task["date"]:
+                    taskdate = datetime.datetime.fromisoformat(task["date"])
+                    if taskdate < today:
+                        tasks[taskid] = task
+        if self.NoTasklogger(tasks, "No due task."): return
+        tasks = self.showCheckBoxList(tasks, "Due Tasks", True)
+        taskids = tasks["taskids"]
+        for taskid in taskids:
+            self.tasks[taskid]["date"] = str(datetime.datetime.now())
+        self.saveTasks()
+        self.simpleLogger(str(len(taskids)) + " tasks scheduled for today.", bcolors.OKBLUE)
+
+    def listUpcomingTasks(self, project=None):
+        tasks = {}
+        today = datetime.datetime.now()
+        for taskid in self.tasks:
+                task = self.tasks[taskid]
+                if project and task["project"] != project:
+                    continue
+                if task["date"]:
+                    taskdate = datetime.datetime.fromisoformat(task["date"])
+                    if taskdate > today:
+                        tasks[taskid] = task
+        if self.NoTasklogger(tasks, "No Upcoming task."): return
+        tasks = self.showCheckBoxList(tasks, "Upcoming Tasks", True)
+        taskids = tasks["taskids"]
+        for taskid in taskids:
+            self.tasks[taskid]["date"] = str(datetime.datetime.now())
+        self.saveTasks()
+        self.simpleLogger(str(len(taskids)) + " tasks scheduled for today.", bcolors.OKBLUE)
+        
+
+
         
