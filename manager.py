@@ -118,7 +118,7 @@ class Manager:
                 choices=choices,
                 default=default)
         ]
-        answers = inquirer.prompt(questions)
+        answers = inquirer.prompt(questions, theme=GreenPassion())
         return answers
 
     #logger 
