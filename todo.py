@@ -4,7 +4,7 @@ import argparse
 import sys
 from manager import *
 
-parser = argparse.ArgumentParser(description='A smart command line todo application.')
+parser = argparse.ArgumentParser(prog="todo", description='A smart command line todo application.')
 group = parser.add_mutually_exclusive_group()
 group.add_argument("-a", "--add", help="add task", nargs='+')
 group.add_argument("-l", "--list", help="list tasks", action="store_true")
