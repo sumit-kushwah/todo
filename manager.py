@@ -7,7 +7,8 @@ from colors import bcolors
 from inquirer.themes import *
 
 home = expanduser("~")
-dbfilepath = home + "/tasks.json"
+# dbfilepath = home + "/tasks.json"
+dbfilepath = "./tasks.json"
 class Manager:
     def __init__(self):
         with open(dbfilepath, 'r') as f:
@@ -118,7 +119,7 @@ class Manager:
                 choices=choices,
                 default=default)
         ]
-        answers = inquirer.prompt(questions, theme=GreenPassion())
+        answers = inquirer.prompt(questions, theme=None)
         return answers
 
     #logger 
@@ -132,7 +133,7 @@ class Manager:
     def simpleLogger(self, message, messageColor=None):
         print(messageColor + message + bcolors.ENDC)
     
-    #project handler functions 
+    # project handler functions 
     def deleteProject(self, project):
         taskids = []
         for taskid in self.tasks:
