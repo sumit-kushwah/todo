@@ -15,13 +15,18 @@ class ProjectsHandler:
         f.close()
 
     def deleteProject(self, project):
+        count = 0
         for task in self.tasks:
             if task.project == project:
                 self.tasks.remove(task)
+                count += 1
         self.saveTasks()
+        print(bcolors.OKGREEN + str(count) + " tasks deleted." + bcolors.ENDC)
     
-    def getProjects(self):
+    def showProjects(self):
         projects = set(())
         for task in self.tasks:
             projects.add(task.project)
-        return list(projects)
+        print("projects\n" + bcolors.OKBLUE)
+        for project in projects:
+            self.simpleLogger("* " + project , bcolors.OKGREEN)

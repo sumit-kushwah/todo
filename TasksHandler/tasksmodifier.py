@@ -20,6 +20,7 @@ class TasksModifier:
         for description in descriptions:
             self.tasks.append(Task(description=description, project=project))
         self.saveTasks()
+        print(bcolors.OKGREEN, str(len(descriptions) + ' tasks added successfully!'))
     
     def deleteTasks(self, tasksids):
         for task in self.tasks:

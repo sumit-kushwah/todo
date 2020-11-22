@@ -2,58 +2,66 @@ import json
 import datetime
 from tasksutils import *
 from config import *
+import tasksdisplayer
 
-class TasksGetter:
+class TasksLister:
     def __init__(self, project=None):
         self.project = project
         with open(dbfilepath, 'r') as f:
             self.tasks = dictToTaskObjects(dict(json.load(f)))
             f.close()
         
-        if project is not None:
-            self.tasks = self.getProjectTasks()
+        title = (project or 'Today') + " tasks"
 
-    def getTodayTasks(self):
+        self.td = TasksDisplayer(title, self.tasks, project)
+
+    def showTodayTasks(self):
         todayTasks = []
         for task in self.tasks:
             if task.isTodayTask():
                 todayTasks.append(task)
-        return todaytasks
+        self.td.tasks = todaytasks
+        self.td.showTasksList()
 
-    def getProjectTasks(self):
+    def showProjectTasks(self):
         projectTasks = []
         for task in self.tasks:
             if task.projectMatched(self.project):
                 projectTasks.append(task)
-        return projectTasks
+        self.td.tasks = projectTasks
+        self.td.showTasksList()
 
-    def getTasks(self):
-        return self.tasks
+    def showAllTasks(self):
+        self.td.showTasksList()
     
-    def getTasksBySearch(self, searchtext):
+    def showTasksBySearch(self, searchtext):
         foundTasks = []
         for task in self.tasks:
             if task.searchTextFound(searchtext):
                 foundTasks.append(task)
-        return foundTasks
+        self.td.tasks = foundTasks
+        self.td.showTasksList()
     
-    def getTasksByLabel(self, label):
+    def showTasksByLabel(self, label):
         tasks = []
         for task in self.tasks:
             if label in task.labels:
                 tasks.append(task)
-        return tasks
+        self.td.tasks = tasks
+        self.td.showTasksList()
     
-    def getDueTasks(self):
+    def showDueTasks(self):
         dueTasks = []
         for task in self.tasks:
             if task.isDueTask():
                 dueTasks.append(task)
-        return dueTasks
+        self.td.tasks = dueTasks
+        self.td.showTasksList()
     
-    def getUpcomingTasks(self):
+    def showUpcomingTasks(self):
         upcomingTasks = []
         for task in self.tasks:
             if task.isUpcomingTask():
                 upcomingTasks.append(task)
-        return upcomingTasks
+        self.td.tasks = upcomingTasks
+        self.td.showTasksList()
