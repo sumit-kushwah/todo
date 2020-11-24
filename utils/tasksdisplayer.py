@@ -1,8 +1,7 @@
 import inquirer
 from config import theme
 from tasksmodifier import *
-from logger import *
-import bcolors
+from colors import bcolors
 
 class TasksDisplayer:
     def __init__(self, title=None, tasks=None, project=None):
@@ -10,14 +9,16 @@ class TasksDisplayer:
         self.tasks = tasks
         self.project = project
     
-    def showTasksList(self):
+    def showTasksList(self, title=None, default=[]):
         choices = []
-        if self.tasks is None or []: 
+        if len(self.tasks) == 0: 
             print(bcolors.WARNING + "No task found." + bcolors.ENDC)
             return
         for task in self.tasks:
             choices.append(task.description, task.id)
 
+        if title is None:
+            title = str(len(self.tasks)) + " tasks"
         questions = [
             inquirer.Checkbox('taskids',
                 message=title,

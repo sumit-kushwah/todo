@@ -2,7 +2,7 @@ import json
 import datetime
 from tasksutils import *
 from config import *
-import tasksdisplayer
+from tasksdisplayer import *
 
 class TasksLister:
     def __init__(self, project=None):
@@ -20,7 +20,7 @@ class TasksLister:
         for task in self.tasks:
             if task.isTodayTask():
                 todayTasks.append(task)
-        self.td.tasks = todaytasks
+        self.td.tasks = todayTasks
         self.td.showTasksList()
 
     def showProjectTasks(self):

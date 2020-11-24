@@ -3,6 +3,10 @@
 import argparse
 import sys
 from manager import *
+sys.path.insert(0, './utils')
+from taskslister import *
+from tasksmodifier import *
+from projecthandler import *
 
 parser = argparse.ArgumentParser(prog="todo", description='A smart command line todo application.')
 group = parser.add_mutually_exclusive_group()
@@ -19,17 +23,19 @@ if (len(sys.argv) == 1):
     parser.print_help()
     sys.exit(1)
 
-manager = Manager()
+tl = TasksLister(args.project)
+tm = TasksModifier()
+ph = ProjectsHandler()
 
 if args.add:
-    manager.addTasks(args.add, args.project)
+    tm.addTasks(args.add, args.project)
 if args.list:
-    manager.listTasks(args.project)
+    tl.showTodayTasks()
 if args.overdue:
-    manager.listDueTasks(args.project)
+    tl.showDueTasks()
 if args.upcoming:
-    manager.listUpcomingTasks(args.project)
+    tl.showUpcomingTasks()
 if args.projects:
-    manager.listProjects()
+    ph.showProjects()
 if args.deleteproject:
-    manager.deleteProject(args.project)
+    ph.deleteProject(args.project)

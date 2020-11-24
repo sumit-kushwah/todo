@@ -1,7 +1,8 @@
 from task import *
 
 def dictToTaskObjects(tasksdict):
-    for taskdict in tasksdict.items():
+    tasks = []
+    for taskdict in tasksdict.values():
         tasks.append(Task().fromdict(taskdict))
     return tasks
 

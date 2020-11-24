@@ -29,4 +29,4 @@ class ProjectsHandler:
             projects.add(task.project)
         print("projects\n" + bcolors.OKBLUE)
         for project in projects:
-            self.simpleLogger("* " + project , bcolors.OKGREEN)
+            print("* " + project , bcolors.OKGREEN)

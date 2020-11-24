@@ -29,7 +29,8 @@ class Task:
     def isTodayTask(self):
         if self.date is None:
             return False
-        taskdate = datetime.date(self.date.year, self.date.month, self.date.day)
+        tempdate = datetime.datetime.fromisoformat(self.date)
+        taskdate = datetime.date(tempdate.year, tempdate.month, tempdate.day)
         today = datetime.datetime.today()
         if (taskdate == today):
             return True
