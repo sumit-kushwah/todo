@@ -1,7 +1,7 @@
 import datetime
 import uuid
 import re
-from taskutils import *
+from taskhelper import *
 
 class Task:
     def __init__(self,
@@ -18,34 +18,39 @@ class Task:
     def fromdict(self, dictobj):
         self.project = dictobj["project"]
         self.id = dictobj["id"]
-        self.date = dictobj["date"]
         self.labels = dictobj["labels"]
         self.description = dictobj["description"]
+        self.date = None
+        if dictobj["date"]:
+            self.date = datetime.datetime.fromisoformat(dictobj["date"])
         return self
 
     def getdict(self):
-        return vars(self)
+        result =  vars(self)
+        result["date"] = str(result["date"])
+        return result
 
-    def isTodayTask(self):
+    def isToday(self):
         if self.date is None:
             return False
-        tempdate = datetime.datetime.fromisoformat(self.date)
-        taskdate = datetime.date(tempdate.year, tempdate.month, tempdate.day)
+        taskdate = self.date
         today = datetime.datetime.today()
-        if (taskdate == today):
+        if (taskdate.year == today.year and
+            taskdate.month == today.month and
+            taskdate.day == today.day):
             return True
         else:
             return False
     
-    def projectMatched(self, project):
+    def ofProject(self, project):
         if self.project is None:
             return False
         if (self.project == project):
             return True
         return False
 
-    def searchTextFound(self, text):
-        if re.search(lower(text), lower(self.description)):
+    def isTextFound(self, text):
+        if re.search(text.lower(), self.description.lower()):
             return True
         
         return False
@@ -53,12 +58,12 @@ class Task:
     def scheduleToToday(self):
         self.date = datetime.datetime.today()
 
-    def isDueTask(self):
+    def isDue(self):
         if self.date < datetime.datetime.today():
             return True
         return False
     
-    def isUpcomingTask(self):
+    def isUpcoming(self):
         tomorrow = datetime.datetime.today() + datetime.timedelta(days = 1)
         if self.date >= tomorrow:
             return True
