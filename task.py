@@ -68,3 +68,16 @@ class Task:
         if self.date >= tomorrow:
             return True
         return False
+
+    def updateDescription(self, newDescription):
+        if newDescription == '':
+            print("New description should not be empty")
+            return
+        self.description = newDescription
+        print(f"Task with id {self.id} updated successfully!")
+    
+    def updateProject(self, newProject):
+        if newProject == '':
+            print("New project name should not be empty")
+            return
+        self.project = newProject

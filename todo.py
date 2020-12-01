@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from commands import listit, add, find
+from commands import listit, add, find, update, delete
 from parser import args, parser
 
 # subcommand checking
@@ -12,6 +12,10 @@ def run(command, args):
         listit.list(args)
     if command == 'find':
         find.find(args)
+    if command == 'update':
+        update.update(args)
+    if command == 'delete':
+        delete.delete(args)
 
 
 if args.command:

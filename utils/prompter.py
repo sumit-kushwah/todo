@@ -36,9 +36,10 @@ def choicesMaker(tasks, vlabel=0):
             choices.append((task.description, task.id))
     if vlabel == 1:
         for task in tasks:
-            choices.append((task.description + task.project, task.id))
+            choices.append((task.description + (task.project or ''), task.id))
     if vlabel >= 2:
-            choices.append((task.description + task.project + " " + task.id, task.id))
+        for task in tasks:
+            choices.append((task.description + (task.project or '') + " " + task.id, task.id))
     return choices
 
 def prompt(tasks, title=None, default=[], vlabel=0, sort=False):
