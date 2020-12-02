@@ -3,3 +3,4 @@ uuid
 dateparser
 yagmail
 firebase-admin
+keyring

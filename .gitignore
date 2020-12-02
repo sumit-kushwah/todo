@@ -4,5 +4,4 @@ __pycache__/
 *.pyc
 *.pyo
 manager.py
-config.py
 .DS_Store
