@@ -1,3 +1,5 @@
 inquirer
 uuid
 dateparser
+yagmail
+firebase-admin

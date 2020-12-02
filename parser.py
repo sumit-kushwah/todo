@@ -67,7 +67,9 @@ syncgroup.add_argument('--push', help='save tasks to firebase', action='store_tr
 # parser for mail command
 
 parser_mail = subparsers.add_parser('mail', help='Mail tasks')
+parser_mail.add_argument('tos', help='receiver gmail ids', nargs="+")
 parser_mail.add_argument('--subject', help='Subject of mail message')
+
 
 # parser for print command
 

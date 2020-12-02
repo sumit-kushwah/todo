@@ -63,6 +63,26 @@ def toToday(ids):
             task.scheduleToToday()
     save(tasks)
 
+def getmaillist(args):
+    title = "Today Tasks"
+    tasks = today()
+    if args.all:
+        title = "All Tasks"
+        tasks = all()
+    if args.due:
+        title = "Overdue Tasks"
+        tasks = dues()
+    if args.upcoming:
+        title = "Upcoming Tasks"
+        tasks = upcoming()
+    if args.project:
+        title = args.project + " Tasks"
+        tasks = filterByProject(tasks, args.project)
+    return {
+        "tasks": tasks,
+        "subject": title,
+    }
+
 def list(args):
     title = "Today Tasks"
     defaultIds = []
@@ -82,6 +102,7 @@ def list(args):
         tasks = upcoming()
         deleteMode = False
     if args.project:
+        title = args.project + " Tasks"
         tasks = filterByProject(tasks, args.project)
         deleteMode = False
 
