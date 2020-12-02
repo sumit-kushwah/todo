@@ -80,7 +80,7 @@ def getmaillist(args):
         tasks = filterByProject(tasks, args.project)
     return {
         "tasks": tasks,
-        "subject": title,
+        "subject": args.subject or title,
     }
 
 def list(args):

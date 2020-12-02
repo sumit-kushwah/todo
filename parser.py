@@ -68,6 +68,11 @@ syncgroup.add_argument('--push', help='save tasks to firebase', action='store_tr
 
 parser_mail = subparsers.add_parser('mail', help='Mail tasks')
 parser_mail.add_argument('tos', help='receiver gmail ids', nargs="+")
+mailgroup = parser_mail.add_mutually_exclusive_group()
+mailgroup.add_argument('-a', '--all', action='store_true', help='list out all tasks')
+mailgroup.add_argument('-d', '--due', action='store_true', help='list out overdue tasks')
+mailgroup.add_argument('-u', '--upcoming', action='store_true', help='list out upcoming tasks')
+parser_mail.add_argument('-p', '--project', help='project name')
 parser_mail.add_argument('--subject', help='Subject of mail message')
 
 
