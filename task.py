@@ -16,18 +16,27 @@ class Task:
         self.description = remExtras(description, self.labels)
 
     def fromdict(self, dictobj):
-        self.project = dictobj["project"]
         self.id = dictobj["id"]
-        self.labels = dictobj["labels"]
         self.description = dictobj["description"]
+        try:
+            self.project = dictobj["project"]
+        except:
+            self.project = None
+        try:
+            self.labels = dictobj["labels"]
+        except:
+            self.labels = []
         self.date = None
-        if dictobj["date"]:
+        try:
             self.date = datetime.datetime.fromisoformat(dictobj["date"])
+        except:
+            self.date = None
         return self
 
     def getdict(self):
         result =  vars(self)
-        result["date"] = str(result["date"])
+        if result["date"]:
+            result["date"] = str(result["date"])
         return result
 
     def isToday(self):

@@ -60,6 +60,9 @@ deletegroup.add_argument('-p', '--project', help='project name')
 # parser for sync command
 
 parser_sync = subparsers.add_parser('sync', help='Sync tasks with firebase')
+syncgroup = parser_sync.add_mutually_exclusive_group()
+syncgroup.add_argument('--pull', help='get tasks from firebase', action='store_true')
+syncgroup.add_argument('--push', help='save tasks to firebase', action='store_true')
 
 # parser for mail command
 
