@@ -1,15 +1,74 @@
-## Todo-cli
+# Todo
 
-A simple command line based TODO application to manage your tasks.
+#### Welcome to Todo-cli
+**A simple command line based TODO application to manage your tasks.**
 
+*If you are a terminal-oriented developer you will love it!*
 ### Features
 
-- add scheduled task (by default added in today list)
-- automatically detects date in task description and schedule automatically
-- create project and related tasks and easily add them to today list to finish it
-- filter tasks based on priority, labels, and others
-- get list of due, today and upcoming tasks easily
-- two theme available 
+- Quickly add task. 
+- Searches date in task description and schedule task automatically.
+- Create project and add related tasks together and later easily add them to today list to finish it.
+- Delete and Update project and task description easily.
+- Create labels for tasks
+- Get list of overdue, today and upcoming tasks
+- Two theme available 
+- Sync tasks with firebase realtime database (setup required).
+- Mail your tasks to someone.
+- Print tasks in pdf format.
+
+###Platforms
+- Linux (any distribution)
+- Mac OS X
+- Windows (extra setup may be required)
+### Setup
+
+Make sure you have **`python`** and **`git`** installed in your system then,
+Run following commands on your terminal.
+```
+$ git clone https://github.com/sumit-kushwah/todo.git
+$ cd todo
+$ pip3 install -r requirements.txt
+$ python3 createalias.py
+add below line to your shell configuration file (i.e .zshrc or .bashrc).
+alias todo='/Users/sumitkushwah/Desktop/CWP/todo/todo'
+```
+After successfully creating alias you will be able to use this application.
+You can try **`list`** command like this-
+```
+$ todo list
+No task found.
+```
+If you have any issue while setting up please let me know [here](https://github.com/sumit-kushwah/todo/issues/new).
+
+### Available commands
+
+```
+    Command             Description
+
+    add                 Add one or more tasks
+    list                List out tasks
+    find                Find tasks by text or #label
+    update              Update tasks description or project name
+    delete              Delete tasks or project
+    sync                Sync tasks with firebase
+    mail                Share your tasks list using mail
+    print               Print tasks as pdf file
+```
+### How to use commands!
+
+**1. To see available commands**
+```
+$ todo --help
+```
+**2. To see arguments within command**
+```
+$ todo <command> --help
+```
+
+#### Contributing change
+
+If you found any issue or want to see a new feature please admit it by creating an new issue or by sending a pull request.
 
 
-
+Happy todoing! :smiley: 
