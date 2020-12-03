@@ -1,8 +1,6 @@
-from fm import get, save
-from utils import prompter
-from colors import bcolors
+from utils import fm, prompter, colors
 
-tasks = get()
+tasks = fm.get()
 
 def today():
     todayTasks = []
@@ -55,13 +53,13 @@ def delete(ids):
     for task in tasks:
         if task.id in ids:
             tasks.remove(task)
-    save(tasks)
+    fm.save(tasks)
 
 def toToday(ids):
     for task in tasks:
         if task.id in ids:
             task.scheduleToToday()
-    save(tasks)
+    fm.save(tasks)
 
 def getTasksAndTitle(args):
     title = "Today Tasks"

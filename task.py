@@ -1,7 +1,7 @@
 import datetime
 import uuid
 import re
-from taskhelper import *
+from utils import taskhelper as th
 
 class Task:
     def __init__(self,
@@ -11,9 +11,9 @@ class Task:
             return
         self.project = project
         self.id = str(uuid.uuid4())
-        self.date = dateFromText(description, project is not None)
-        self.labels = labelsFromText(description)
-        self.description = remExtras(description, self.labels)
+        self.date = th.dateFromText(description, project is not None)
+        self.labels = th.labelsFromText(description)
+        self.description = th.remExtras(description, self.labels)
 
     def fromdict(self, dictobj):
         self.id = dictobj["id"]

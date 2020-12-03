@@ -1,6 +1,6 @@
 import inquirer
 from config import theme
-from colors import bcolors
+from utils import colors
 
 def scheduleMsg(length):
     if length == 0:

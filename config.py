@@ -1,7 +1,7 @@
 from inquirer.themes import *
 
 # firebase settings
-firebaseSDKFile = "~/firebase.json"
+firebaseSDKFile = "/Users/sumitkushwah/firebase.json"
 databaseUrl = "https://todo-8370f.firebaseio.com/"
 
 # general settings

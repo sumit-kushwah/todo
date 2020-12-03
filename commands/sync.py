@@ -3,7 +3,7 @@ import firebase_admin
 from firebase_admin import db
 import config
 from task import Task
-from fm import save
+from utils import fm
 
 dbfile = config.dbfilepath
 
@@ -25,7 +25,7 @@ def pull():
     tasks = []
     for id in tasksdict:
         tasks.append(Task().fromdict(tasksdict[id]))
-    save(tasks)
+    fm.save(tasks)
 
 def sync(args):    
     if args.push:

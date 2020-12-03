@@ -1,6 +1,5 @@
-from fm import get, save
+from utils import fm, colors
 from task import Task
-from colors import *
 
 def makeDescriptions(words):
     descriptions = []
@@ -17,9 +16,9 @@ def makeDescriptions(words):
 
 
 def tasks(words, project=None):
-    tasks = get()
+    tasks = fm.get()
     descriptions = makeDescriptions(words)
     for description in descriptions:
         tasks.append(Task(description=description, project=project))
-    save(tasks)
+    fm.save(tasks)
     print(bcolors.OKGREEN + str(len(descriptions)) + ' task added successfully!')

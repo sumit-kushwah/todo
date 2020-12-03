@@ -1,7 +1,7 @@
-from fm import get, save
+from utils import fm
 import inquirer
 
-tasks = get()
+tasks = fm.get()
 
 def textAsk(title, message):
     questions = [ inquirer.Text(title, message) ]
@@ -12,7 +12,7 @@ def updateTask(id, description):
     for task in tasks:
         if task.id == id:
             task.updateDescription(description)
-            save(tasks)
+            fm.save(tasks)
             return
     print("No task found with this task-id")
 
@@ -23,7 +23,7 @@ def udpateProject(oldname, newname):
             count = count + 1
             task.updateProject(newname)
     if count > 0:
-        save(tasks)
+        fm.save(tasks)
         print("Project name updated")
     else:
         print(f"No project found with {oldname} name")

@@ -1,9 +1,7 @@
-from fm import get, save
+from utils import fm, prompter, colors
 from commands import listit
-from utils import prompter
-from colors import bcolors
 
-tasks = get()
+tasks = fm.get()
 
 def byText(text):
     results = []

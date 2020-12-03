@@ -1,12 +1,12 @@
-from fm import get, save
+from utils import fm
 
-tasks = get()
+tasks = fm.get()
 
 def deleteTask(id):
     for task in tasks:
         if task.id == id:
             tasks.remove(task)
-            save(tasks)
+            fm.save(tasks)
             print(f"Task with id {id} deleted!")
             return
     print("No task found with this task-id")
@@ -17,7 +17,7 @@ def deleteProject(project):
         if task.project == project:
             tasks.remove(task)
             count += 1
-    saveTasks(tasks)
+    fm.save(tasks)
     if count == 0:
         print("No project found with project name.")
         return
