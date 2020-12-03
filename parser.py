@@ -39,7 +39,7 @@ parser_list.add_argument('--verbose', '-v', action='count', help='verbosity labe
 # parser for find command
 
 parser_find = subparsers.add_parser('find', help="find tasks by text or #label")
-parser_find.add_argument('text', help="text or #label")
+parser_find.add_argument('text', help="reg-exp or #label")
 parser_find.add_argument('--sort', action='store_true', help='sort tasks by name, date etc.')
 parser_find.add_argument('--verbose', '-v', action='count', help='verbosity label', default=0)
 
