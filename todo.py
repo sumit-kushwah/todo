@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from commands import listit, add, find, update, delete, sync, mail
+from commands import listit, add, find, update, delete, sync, mail, print
 from parser import args, parser
 
 # subcommand checking
@@ -20,7 +20,8 @@ def run(command, args):
         sync.sync(args)
     if command == 'mail':
         mail.send(args)
-
+    if command == 'print':
+        print.print(args)
 if args.command:
     command = args.command
     run(command, args)

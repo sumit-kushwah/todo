@@ -79,6 +79,11 @@ parser_mail.add_argument('--subject', help='Subject of mail message')
 # parser for print command
 
 parser_print = subparsers.add_parser('print', help='Print tasks')
+printgroup = parser_print.add_mutually_exclusive_group()
+printgroup.add_argument('-a', '--all', action='store_true', help='list out all tasks')
+printgroup.add_argument('-d', '--due', action='store_true', help='list out overdue tasks')
+printgroup.add_argument('-u', '--upcoming', action='store_true', help='list out upcoming tasks')
+parser_print.add_argument('-p', '--project', help='project name')
 parser_print.add_argument('-f', '--filename', help='File name')
 
 # parsing the arguments
