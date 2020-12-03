@@ -1,6 +1,6 @@
 # Todo
 
-#### Welcome to Todo-cli
+### Welcome to Todo-cli
 **A simple command line based TODO application to manage your tasks.**
 
 *If you are a terminal-oriented developer you will love it!*
@@ -17,7 +17,7 @@
 - Mail your tasks to someone.
 - Print tasks in pdf format.
 
-###Platforms
+### Platforms
 - Linux (any distribution)
 - Mac OS X
 - Windows (extra setup may be required)
@@ -88,7 +88,7 @@ import yagmail
 yagmail.register('gmailusername', 'gmailpassword')
 ```
 
-#### Contributing change
+### Contributing change
 
 If you found any issue or want to see a new feature please admit it by creating an new issue or by sending a pull request.
 
