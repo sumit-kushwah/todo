@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-import sys
-import os
-sys.path.insert(0, os.path.join('..'))
 from commands import listit, add, find, update, delete, sync, mail, print
 from parser import args, parser
 
@@ -25,6 +22,7 @@ def run(command, args):
         mail.send(args)
     if command == 'print':
         print.print(args)
+
 if args.command:
     command = args.command
     run(command, args)

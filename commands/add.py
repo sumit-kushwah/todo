@@ -1,24 +1,10 @@
-from utils import fm, colors
+from utils import fm
+from utils.colors import *
 from task import Task
 
-def makeDescriptions(words):
-    descriptions = []
-    description = ''
-    for word in words:
-        if word == ',' and description != '':
-            descriptions.append(description)
-            description = ''
-        description = description + word + ' '
-    
-    if description != '':
-        descriptions.append(description)
-    return descriptions
-
-
-def tasks(words, project=None):
+def tasks(descriptions, project=None):
     tasks = fm.get()
-    descriptions = makeDescriptions(words)
     for description in descriptions:
         tasks.append(Task(description=description, project=project))
     fm.save(tasks)
-    print(bcolors.OKGREEN + str(len(descriptions)) + ' task added successfully!')
+    print(bcolors.OKGREEN + str(len(descriptions)) + ' task added!')
