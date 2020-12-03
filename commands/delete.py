@@ -1,4 +1,5 @@
 from utils import fm
+from utils.colors import *
 
 tasks = fm.get()
 
@@ -7,9 +8,9 @@ def deleteTask(id):
         if task.id == id:
             tasks.remove(task)
             fm.save(tasks)
-            print(f"Task with id {id} deleted!")
+            print("Ok! " + bcolors.WARNING + f"Task with id {id} deleted.")
             return
-    print("No task found with this task-id")
+    print(bcolors.FAIL + "No task found with this taskid.")
 
 def deleteProject(project):
     count = 0
@@ -19,9 +20,9 @@ def deleteProject(project):
             count += 1
     fm.save(tasks)
     if count == 0:
-        print("No project found with project name.")
+        print(bcolors.FAIL + "No project found with project name.")
         return
-    print(str(count) + " tasks deleted.")
+    print("Ok! " + bcolors.WARNING + str(count) + " tasks deleted with this project.")
 
     
 def delete(args):

@@ -5,12 +5,12 @@ from utils.colors import *
 def scheduleMsg(length):
     if length == 0:
         return 
-    print(bcolors.OKGREEN + str(length) + " task scheduled to today." + bcolors.ENDC)
+    print(bcolors.OKCYAN + str(length) + " task scheduled to today." + bcolors.ENDC)
 
 def completeMsg(length):
     if length == 0:
         return
-    print(bcolors.OKGREEN + str(length) + " task completed." + bcolors.ENDC)
+    print(bcolors.OKCYAN + str(length) + " task completed." + bcolors.ENDC)
 
 def sortTasks(tasks):
     choices = ["name", "date"]

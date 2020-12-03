@@ -1,5 +1,6 @@
 from utils import fm
 import inquirer
+from utils.colors import *
 
 tasks = fm.get()
 
@@ -14,7 +15,7 @@ def updateTask(id, description):
             task.updateDescription(description)
             fm.save(tasks)
             return
-    print("No task found with this task-id")
+    print(bcolors.FAIL + "No task found with this task-id")
 
 def udpateProject(oldname, newname):
     count = 0
@@ -24,9 +25,9 @@ def udpateProject(oldname, newname):
             task.updateProject(newname)
     if count > 0:
         fm.save(tasks)
-        print("Project name updated")
+        print(bcolors.OKGREEN + "Project name updated")
     else:
-        print(f"No project found with {oldname} name")
+        print(bcolors.FAIL + f"No project found with {oldname} name")
 
     
 def update(args):

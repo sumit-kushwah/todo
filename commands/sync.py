@@ -4,6 +4,7 @@ from firebase_admin import db
 import config
 from task import Task
 from utils import fm
+from utils.colors import *
 
 dbfile = config.dbfilepath
 
@@ -29,10 +30,18 @@ def pull():
 
 def sync(args):    
     if args.push:
-        push()
+        try:
+            push()
+            print(bcolors.OKGREEN + "Pushed!!")
+        except:
+            print(bcolors.FAIL + "Failed to push.")
         return
     if args.pull:
-        pull()
+        try:
+            pull()
+            print(bcolors.OKGREEN + "Pulled!!")
+        except:
+            print(bcolors.FAIL + "Failed to pull.")
         return
-    print("Please specify atleast one option.")
+    print(bcolors.WARNING + "Please specify atleast one option.")
         

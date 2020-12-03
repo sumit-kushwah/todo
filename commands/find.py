@@ -3,10 +3,10 @@ from commands import listit
 
 tasks = fm.get()
 
-def byText(text):
+def byText(exp):
     results = []
     for task in tasks:
-        if task.isTextFound(text):
+        if task.isTextFound(exp):
             results.append(task)
     return results
 
@@ -26,7 +26,7 @@ def find(args):
         title = str(len(ftasks)) + ' ' + f" task found with label '{label}'"
     else:
         ftasks = byText(text)
-        title = str(len(ftasks)) + ' ' + f" task found with text '{text}'"
+        title = str(len(ftasks)) + ' ' + f" task found with re '{text}'"
 
     dids = listit.todayIds(ftasks)
     ids = prompter.prompt(ftasks, title, dids, args.verbose, args.sort)
