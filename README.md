@@ -65,7 +65,7 @@ $ todo --help
 ```
 $ todo <command> --help
 ```
-**3. To use `sync` and `mail` change [config.py](https://github.com/sumit-kushwah/todo/blob/master/config.py)**
+**3. To use `sync` and `mail` command, change [config.py](https://github.com/sumit-kushwah/todo/blob/master/config.py)**
 
 First create a project in firebase (see ) and then create realtime database ([see tutorial](https://firebase.google.com/docs/database)),
 Set these three variables as following.
@@ -87,6 +87,18 @@ To set keyring for yagmail run this python script:
 import yagmail
 yagmail.register('gmailusername', 'gmailpassword')
 ```
+
+**4. To use `print` command**
+
+You need to install `wkhtmltopdf`
+#### Install
+
+MacOS: `brew install Caskroom/cask/wkhtmltopdf`
+
+Debian/Ubuntu: `apt-get install wkhtmltopdf`
+
+Windows: `choco install wkhtmltopdf`
+
 
 ### Contributing change
 
