@@ -50,10 +50,11 @@ def todayIds(tasks):
     return ids
 
 def delete(ids):
+    remtasks = []
     for task in tasks:
-        if task.id in ids:
-            tasks.remove(task)
-    fm.save(tasks)
+        if task.id not in ids:
+            remtasks.append(task)
+    fm.save(remtasks)
 
 def toToday(ids):
     for task in tasks:
