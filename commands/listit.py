@@ -63,7 +63,7 @@ def toToday(ids):
             task.scheduleToToday()
     save(tasks)
 
-def getmaillist(args):
+def getTasksAndTitle(args):
     title = "Today Tasks"
     tasks = today()
     if args.all:
@@ -80,7 +80,7 @@ def getmaillist(args):
         tasks = filterByProject(tasks, args.project)
     return {
         "tasks": tasks,
-        "subject": args.subject or title,
+        "title": title,
     }
 
 def list(args):

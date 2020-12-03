@@ -3,5 +3,6 @@ todo
 __pycache__/
 *.pyc
 *.pyo
+configurations
 manager.py
 .DS_Store
