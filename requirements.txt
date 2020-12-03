@@ -4,3 +4,4 @@ dateparser
 yagmail
 firebase-admin
 keyring
+pdfkit
