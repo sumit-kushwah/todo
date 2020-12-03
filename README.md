@@ -65,6 +65,28 @@ $ todo --help
 ```
 $ todo <command> --help
 ```
+**3. To use `sync` and `mail` change [config.py](https://github.com/sumit-kushwah/todo/blob/master/config.py)**
+
+First create a project in firebase (see ) and then create realtime database ([see tutorial](https://firebase.google.com/docs/database)),
+Set these three variables as following.
+
+config.py
+```python
+# firebase settings
+firebaseSDKFile = "<folder-path>/firebase.json"
+databaseUrl = "https://todo-xyz.firebaseio.com/"
+
+# mail settings
+mailusername = "<your_gmail_username>"
+```
+In this project to send mail we are using [yagmail module](https://pypi.org/project/yagmail/) which requires keyring setup which is very easy to setup.
+
+To set keyring for yagmail run this python script:
+
+```python
+import yagmail
+yagmail.register('gmailusername', 'gmailpassword')
+```
 
 #### Contributing change
 
