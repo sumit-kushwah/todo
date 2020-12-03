@@ -58,8 +58,8 @@ class Task:
             return True
         return False
 
-    def isTextFound(self, text):
-        if re.search(text.lower(), self.description.lower()):
+    def isTextFound(self, exp):
+        if re.search(exp, self.description.lower()):
             return True
         
         return False
