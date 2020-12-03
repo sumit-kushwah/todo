@@ -7,4 +7,4 @@ def tasks(descriptions, project=None):
     for description in descriptions:
         tasks.append(Task(description=description, project=project))
     fm.save(tasks)
-    print(bcolors.OKGREEN + str(len(descriptions)) + ' task added!')
+    print(bcolors.OKBLUE + str(len(descriptions)) + ' task added.')

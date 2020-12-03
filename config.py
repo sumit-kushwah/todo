@@ -9,7 +9,7 @@ databaseUrl = "https://todo-8370f.firebaseio.com/"
 
 # general settings
 dbfilepath = home + "/tasks.json"
-theme = GreenPassion() # greenpassion or None (for default theme)
+theme = None # GreenPassion() or None (for default theme)
 
 # set your gmail username here
 mailusername = "sumitkushwah1729"
