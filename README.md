@@ -43,18 +43,19 @@ If you have any issue while setting up please let me know [here](https://github.
 
 ### Available commands
 
-```
-    Command             Description
+These are following available commands with their description.
 
-    add                 Add one or more tasks
-    list                List out tasks
-    find                Find tasks by text or #label
-    update              Update tasks description or project name
-    delete              Delete tasks or project
-    sync                Sync tasks with firebase
-    mail                Share your tasks list using mail
-    print               Print tasks as pdf file
-```
+| Command  | Description                            | 
+|:-------  |:-------------------------------------- |
+|    add   |Add one or more tasks                   |
+|   list   |List out tasks                          |
+|   find   |Find tasks by text or #label            |
+|   update |Update tasks description or project name|
+|   delete |Delete tasks or project                 |
+|   sync   |Sync tasks with firebase                |
+|   mail   |Share your tasks list using mail        |
+|   print  |Print tasks as pdf file                 |
+
 ### How to use commands!
 
 **1. To see available commands**
